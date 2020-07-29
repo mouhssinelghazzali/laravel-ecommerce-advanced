@@ -38,13 +38,13 @@ Route::group(['namespace'=>'Admin','middleware' => 'auth:admin'], function() {
         Route::post('store','MainCategoriesController@store') -> name('admin.maincategories.store');
         Route::get('edit/{id}','MainCategoriesController@edit') -> name('admin.maincategories.edit');
         Route::post('update/{id}','MainCategoriesController@update') -> name('admin.maincategories.update');
-        Route::get('delete/{id}','LanguagesController@destroy') -> name('admin.maincategories.delete');
+        Route::get('delete/{id}','MainCategoriesController@destroy') -> name('admin.maincategories.delete');
+        Route::get('changeStatus/{id}','MainCategoriesController@changeStatus') -> name('admin.maincategories.status');
     });
     ######################### End  Main Categoris Routes  ########################
-});
 
 
-######################### Begin vendors Routes ########################
+    ######################### Begin vendors Routes ########################
 Route::group(['prefix' => 'vendors'], function () {
     Route::get('/','VendorsController@index') -> name('admin.vendors');
     Route::get('create','VendorsController@create') -> name('admin.vendors.create');
@@ -54,6 +54,10 @@ Route::group(['prefix' => 'vendors'], function () {
     Route::get('delete/{id}','VendorsController@destroy') -> name('admin.vendors.delete');
 });
 ######################### End  vendors Routes  ########################
+});
+
+
+
 
 Route::group(['namespace'=>'Admin','middleware' => 'guest:admin'], function(){
     Route::get('login' ,'LoginController@getLogin')-> name('get.admin.login');
