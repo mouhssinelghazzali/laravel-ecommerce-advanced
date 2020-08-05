@@ -392,8 +392,8 @@
             $("#longitude").val(Lng);
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKZAuxH9xTzD2DLY2nKSPKrgRi2_y0ejs&libraries=places&callback=initAutocomplete&language=fr&region=MA
-         async defer"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzWp_YkFQBhW7Zm6CytHJvRoECMn_ZJ3A&libraries=places&callback=initAutocomplete&language=ar&region=EG
+    async defer"></script>
     @stop
 
 

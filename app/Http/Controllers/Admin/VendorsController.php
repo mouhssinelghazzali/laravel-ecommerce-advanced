@@ -10,6 +10,7 @@ use App\Http\Requests\VendorRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\VendorCreated;
 use DB;
+use Illuminate\Support\Str;
 class VendorsController extends Controller
 {
     /**
@@ -169,9 +170,22 @@ class VendorsController extends Controller
             return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
-    public function changeStatus()
+    public function changeStatus($id)
     {
+        try {
+            $vendor = Vendor::find($id);
+            if (!$vendor)
+                return redirect()->route('admin.vendors')->with(['error' => 'هذا القسم غير موجود ']);
 
+           $status =  $vendor -> active  == 0 ? 1 : 0;
+
+           $vendor -> update(['active' =>$status ]);
+
+            return redirect()->route('admin.vendors')->with(['success' => ' تم تغيير الحالة بنجاح ']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
     }
     /**
      * Remove the specified resource from storage.
@@ -181,6 +195,26 @@ class VendorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        try {
+            $vendor = Vendor::find($id);
+            if (!$vendor)
+                return redirect()->route('admin.vendors')->with(['error' => 'هذا القسم غير موجود ']);
+
+
+
+            $image = Str::after($vendor->logo, 'assets/');
+
+            $image = base_path('assets/' . $image);
+
+            unlink($image); //delete from folder
+
+            $vendor->delete();
+
+            return redirect()->route('admin.vendors')->with(['success' => 'تم حذف القسم بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
     }
 }

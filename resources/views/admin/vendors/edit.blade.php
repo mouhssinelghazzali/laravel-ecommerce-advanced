@@ -239,6 +239,8 @@
         // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
         let lat  = $('#latitude').val();
         let lng = $('#longitude').val();
+
+
         $('#pac-input').val('{{$vendor  -> address}}');
         if($('#latitude').val() !== "" && $('#longitude').val() !== ""){
             prevlat = lat;
@@ -248,6 +250,7 @@
             prevLng =46.724130;
         }
         function initAutocomplete() {
+            var pos = {lat:   {{ $vendor->latitude }} ,  lng: {{ $vendor->longitude }} };
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 24.740691, lng: 46.6528521 },
                 zoom: 13,
@@ -417,6 +420,6 @@
             $("#longitudef").val(Lng);
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKZAuxH9xTzD2DLY2nKSPKrgRi2_y0ejs&libraries=places&callback=initAutocomplete&language=ar&region=EG
-         async defer"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl9fltNorm6KZeeUU-zkXY4vxk0YkDxRY&libraries=places&callback=initAutocomplete&language=ar&region=EG
+    async defer"></script>
 @stop
